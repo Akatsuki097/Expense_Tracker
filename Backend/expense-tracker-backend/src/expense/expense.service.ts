@@ -19,6 +19,7 @@ export class ExpenseService {
     const { page, limit, category } = options;
     const filter = category ? { category } : {};
     return await this.expenseModel.find(filter)
+      .sort({ date: -1 })
       .skip((page - 1) * limit)
       .limit(limit)
       .exec();

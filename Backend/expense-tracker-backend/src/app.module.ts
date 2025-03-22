@@ -18,7 +18,8 @@ import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost/expense-tracker'),
+    MongooseModule.forRoot('mongodb://127.0.0.1:27017/expense-tracker', {
+    }),
     ScheduleModule.forRoot(), // For cron jobs
     ExpenseModule,
     // Other modules (e.g., CategoryModule) go here
