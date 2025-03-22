@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useGetExpensesQuery , useUpdateExpenseMutation, useDeleteExpenseMutation} from '../services/expense';
 import { FaEdit, FaTrash, FaSave, FaTimes } from 'react-icons/fa';
+import '../App.css'
 
 const ExpenseList: React.FC = () => {
   const [page, setPage] = useState(1);
@@ -11,7 +12,7 @@ const ExpenseList: React.FC = () => {
   const [updateExpense] = useUpdateExpenseMutation();
   const [deleteExpense] = useDeleteExpenseMutation();
 
-  
+
   const startEdit = (expense: any) => {
     setEditingId(expense._id);
     setEditValues({
