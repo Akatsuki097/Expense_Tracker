@@ -14,6 +14,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ExpenseModule } from './expense/expense.module';
+import { CategoryModule } from './expense/category.module';
 import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
@@ -22,6 +23,7 @@ import { ScheduleModule } from '@nestjs/schedule';
     }),
     ScheduleModule.forRoot(), // For cron jobs
     ExpenseModule,
+    CategoryModule,
     // Other modules (e.g., CategoryModule) go here
   ],
   controllers: [],

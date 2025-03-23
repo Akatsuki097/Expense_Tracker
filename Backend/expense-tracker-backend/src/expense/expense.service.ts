@@ -5,12 +5,19 @@ import { Model } from 'mongoose';
 import { Expense } from './schema/expense.schema';
 import { CreateExpenseDto } from './dto/create-expense.dto';
 import { UpdateExpenseDto } from './dto/update-expense.dto';
+import { CategoryService } from './category.service';
 
 @Injectable()
 export class ExpenseService {
-  constructor(@InjectModel('Expense') private expenseModel: Model<Expense>) {}
+  constructor(
+    @InjectModel('Expense') private expenseModel: Model<Expense>,
+    private readonly categoryService: CategoryService
+  ) {}
 
   async create(createExpenseDto: CreateExpenseDto): Promise<Expense> {
+    // Auto-create category if needed
+    await this.categoryService.findOrCreate(createExpenseDto.category);
+    
     const createdExpense = new this.expenseModel(createExpenseDto);
     return await createdExpense.save();
   }

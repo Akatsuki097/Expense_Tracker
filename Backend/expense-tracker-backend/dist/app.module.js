@@ -10,6 +10,7 @@ exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const expense_module_1 = require("./expense/expense.module");
+const category_module_1 = require("./expense/category.module");
 const schedule_1 = require("@nestjs/schedule");
 let AppModule = class AppModule {
 };
@@ -20,6 +21,7 @@ exports.AppModule = AppModule = __decorate([
             mongoose_1.MongooseModule.forRoot('mongodb://127.0.0.1:27017/expense-tracker', {}),
             schedule_1.ScheduleModule.forRoot(),
             expense_module_1.ExpenseModule,
+            category_module_1.CategoryModule,
         ],
         controllers: [],
         providers: [],

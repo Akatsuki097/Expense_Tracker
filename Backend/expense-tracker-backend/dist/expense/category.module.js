@@ -6,24 +6,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ExpenseModule = void 0;
+exports.CategoryModule = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
-const expense_controller_1 = require("./expense.controller");
-const expense_service_1 = require("./expense.service");
-const expense_schema_1 = require("./schema/expense.schema");
-const category_module_1 = require("./category.module");
-let ExpenseModule = class ExpenseModule {
+const category_service_1 = require("./category.service");
+const category_controller_1 = require("./category.controller");
+const category_schema_1 = require("./schema/category.schema");
+let CategoryModule = class CategoryModule {
 };
-exports.ExpenseModule = ExpenseModule;
-exports.ExpenseModule = ExpenseModule = __decorate([
+exports.CategoryModule = CategoryModule;
+exports.CategoryModule = CategoryModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            mongoose_1.MongooseModule.forFeature([{ name: 'Expense', schema: expense_schema_1.ExpenseSchema }]),
-            category_module_1.CategoryModule,
+            mongoose_1.MongooseModule.forFeature([{ name: 'Category', schema: category_schema_1.CategorySchema }]),
         ],
-        controllers: [expense_controller_1.ExpenseController],
-        providers: [expense_service_1.ExpenseService],
+        controllers: [category_controller_1.CategoryController],
+        providers: [category_service_1.CategoryService],
+        exports: [category_service_1.CategoryService],
     })
-], ExpenseModule);
-//# sourceMappingURL=expense.module.js.map
+], CategoryModule);
+//# sourceMappingURL=category.module.js.map

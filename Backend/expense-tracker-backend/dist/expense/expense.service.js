@@ -16,12 +16,16 @@ exports.ExpenseService = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
+const category_service_1 = require("./category.service");
 let ExpenseService = class ExpenseService {
     expenseModel;
-    constructor(expenseModel) {
+    categoryService;
+    constructor(expenseModel, categoryService) {
         this.expenseModel = expenseModel;
+        this.categoryService = categoryService;
     }
     async create(createExpenseDto) {
+        await this.categoryService.findOrCreate(createExpenseDto.category);
         const createdExpense = new this.expenseModel(createExpenseDto);
         return await createdExpense.save();
     }
@@ -56,6 +60,7 @@ exports.ExpenseService = ExpenseService;
 exports.ExpenseService = ExpenseService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, mongoose_1.InjectModel)('Expense')),
-    __metadata("design:paramtypes", [mongoose_2.Model])
+    __metadata("design:paramtypes", [mongoose_2.Model,
+        category_service_1.CategoryService])
 ], ExpenseService);
 //# sourceMappingURL=expense.service.js.map

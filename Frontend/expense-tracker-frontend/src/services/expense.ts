@@ -1,5 +1,6 @@
 // src/services/expense.ts
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import {Category} from "../types"
 
 export const expenseApi = createApi({
   reducerPath: 'expenseApi',
@@ -8,6 +9,9 @@ export const expenseApi = createApi({
     getExpenses: builder.query({
       query: ({ page = 1, limit = 10, category }) =>
         `expenses?page=${page}&limit=${limit}${category ? `&category=${category}` : ''}`,
+    }),
+    getCategories: builder.query<Category[], void>({
+      query: () => '/categories', 
     }),
     addExpense: builder.mutation({
       query: (newExpense) => ({
@@ -37,4 +41,5 @@ export const {
   useAddExpenseMutation,
   useUpdateExpenseMutation,
   useDeleteExpenseMutation,
+  useGetCategoriesQuery, 
 } = expenseApi;
