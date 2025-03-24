@@ -1,4 +1,3 @@
-// expense/dto/create-expense.dto.ts
 import { IsMongoId, IsNumber, IsOptional, IsString } from 'class-validator';
 export class CreateExpenseDto {
     @IsNumber()

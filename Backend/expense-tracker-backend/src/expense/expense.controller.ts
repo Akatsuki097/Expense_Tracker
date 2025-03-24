@@ -1,4 +1,3 @@
-// expense/expense.controller.ts
 import { Controller, Get, Post, Body, Put, Param, Delete, Query } from '@nestjs/common';
 import { ExpenseService } from './expense.service';
 import { CreateExpenseDto } from './dto/create-expense.dto';

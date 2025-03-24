@@ -1,4 +1,3 @@
-// expense/expense.module.ts
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ExpenseController } from './expense.controller';

@@ -1,4 +1,3 @@
-// expense/dto/update-expense.dto.ts
 import { IsString, IsNumber, IsOptional } from 'class-validator';
 export class UpdateExpenseDto {
     @IsOptional()

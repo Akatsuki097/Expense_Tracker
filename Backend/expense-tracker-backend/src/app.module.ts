@@ -24,7 +24,6 @@ import { ScheduleModule } from '@nestjs/schedule';
     ScheduleModule.forRoot(), // For cron jobs
     ExpenseModule,
     CategoryModule,
-    // Other modules (e.g., CategoryModule) go here
   ],
   controllers: [],
   providers: [],

@@ -1,4 +1,4 @@
-// expense/expense.service.ts
+
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
@@ -16,8 +16,6 @@ export class ExpenseService {
   ) {}
 
   async create(createExpenseDto: CreateExpenseDto): Promise<Expense> {
-    // Auto-create category if needed
-    // await this.categoryService.findOrCreate(createExpenseDto.category);
     
     const category = await this.categoryService.findOrCreate(
       createExpenseDto.category
@@ -29,11 +27,7 @@ export class ExpenseService {
     });
    await createdExpense.save();
 
-  //  // Add expense to category's expenses array
-  //  await this.categoryService.addExpenseToCategory(
-  //   category._id,
-  //   createdExpense._id
-  //  );
+ 
     
    return createdExpense.populate('category');
   }
@@ -62,19 +56,18 @@ export class ExpenseService {
   }
 
   async update(id: string, updateExpenseDto: UpdateExpenseDto): Promise<Expense> {
-    // Create a copy of the DTO
+ 
     const updatePayload: any = { ...updateExpenseDto };
   
-    // Handle category conversion if present
     if (updatePayload.category) {
       const category = await this.categoryService.findOrCreate(updatePayload.category);
-      updatePayload.category = category._id; // Use the ObjectID
+      updatePayload.category = category._id; 
     }
   
     const updatedExpense = await this.expenseModel
       .findByIdAndUpdate(id, updatePayload, { 
         new: true,
-        runValidators: true // Ensure validations run
+        runValidators: true 
       })
       .populate('category');
   
@@ -89,30 +82,3 @@ export class ExpenseService {
   }
 }
 
-// @Injectable()
-// export class ExpenseService {
-//   constructor(
-//     @InjectModel('Expense') private expenseModel: Model<Expense>,
-//     private categoryService: CategoryService
-//   ) {}
-
-//   async create(createExpenseDto: CreateExpenseDto): Promise<Expense> {
-//     const category = await this.categoryService.findOrCreate(createExpenseDto.category);
-    
-//     const expense = new this.expenseModel({
-//       ...createExpenseDto,
-//       category: category._id
-//     });
-    
-//     await expense.save();
-    
-//     // // Add expense to category's expenses array
-//     // await this.categoryService.addExpenseToCategory(category._id, expense._id);
-    
-//     return expense.populate('category');
-//   }
-
-//   async findAll(): Promise<Expense[]> {
-//     return this.expenseModel.find().populate('category').exec();
-//   }
-// }
