@@ -1,0 +1,98 @@
+/* ExpenseList.css */
+.expense-tracker {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .expense-header {
+    display: flex;
+    background: #f5f5f5;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .header-item {
+    flex: 1;
+    padding: 0 10px;
+  }
+  
+  .amount { width: 120px; flex: 0 0 120px; }
+  .description { flex: 2; }
+  .category { width: 150px; flex: 0 0 150px; }
+  .actions { width: 100px; flex: 0 0 100px; }
+  
+  .expense-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+  }
+  
+  .expense-item:hover {
+    transform: translateX(5px);
+  }
+  
+  .expense-amount {
+    width: 120px;
+    font-weight: 600;
+    color: #2ecc71;
+  }
+  
+  .expense-description {
+    flex: 2;
+    color: #333;
+  }
+  
+  .category-tag {
+    background: #e8f4fc;
+    color: #2980b9;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.9em;
+  }
+  
+  .expense-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .expense-actions button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #95a5a6;
+    padding: 5px;
+  }
+  
+  .expense-actions button:hover {
+    color: #e74c3c;
+  }
+  
+  .pagination {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+  
+  .pagination button {
+    padding: 8px 20px;
+    border: none;
+    background: #3498db;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .pagination button:disabled {
+    background: #bdc3c7;
+    cursor: not-allowed;
+  }

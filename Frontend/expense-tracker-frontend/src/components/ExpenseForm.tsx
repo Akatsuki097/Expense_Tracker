@@ -63,82 +63,159 @@ useEffect(() => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await addExpense({
-      amount: Number(formData.amount),
-      description: formData.description,
-      category: formData.category,
-    });
-    setFormData({ amount: '', description: '', category: '' });
+     // Validate amount is provided and valid
+     if (!formData.amount || isNaN(Number(formData.amount))) {
+      alert('Please enter a valid amount');
+      return;
+    }
+
+    try {
+      await addExpense({
+        amount: Number(formData.amount),
+        description: formData.description,
+        category: formData.category
+      });
+      setFormData({ amount: '', description: '', category: '' });
+    } catch (error) {
+      console.error('Failed to save expense:', error);
+      alert('Failed to save expense. Please check your input.');
+    }
   };
 
   const categoryExists = categories.some(
     (c: Category) => c.name.toLowerCase() === formData.category.toLowerCase()
   );
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <input
-        name="amount"
-        placeholder="Amount"
-        value={formData.amount}
-        onChange={handleChange}
-      />
-      <input
-        name="description"
-        placeholder="Description"
-        value={formData.description}
-        onChange={handleChange}
-      />
-       <div className="category-selector">
-       <input
-        type="text"
-        placeholder="Select or type a category"
-        value={formData.category}
-        onChange={handleInputChange}
-        onFocus={() => {
-          setIsDropdownOpen(true);
-          //initialCategorySet.current = true; // User is taking control
-        }}
-        onBlur={() => {
-          setTimeout(() => {
-            // Only reset if field is empty
-            // if (!formData.category.trim()) {
-            //   setFormData(prev => ({
-            //     ...prev,
-            //     category: categories[0]?.name || ''
-            //   }));
-            // }
-            setIsDropdownOpen(false);
-          }, 100);
-        }}
-      />
+//   return (
+//     <form onSubmit={handleSubmit}>
+//       <input
+//         name="amount"
+//         placeholder="Amount"
+//         value={formData.amount}
+//         onChange={handleChange}
+//       />
+//       <input
+//         name="description"
+//         placeholder="Description"
+//         value={formData.description}
+//         onChange={handleChange}
+//       />
+//        <div className="category-selector">
+//        <input
+//         type="text"
+//         placeholder="Select or type a category"
+//         value={formData.category}
+//         onChange={handleInputChange}
+//         onFocus={() => {
+//           setIsDropdownOpen(true);
+//         }}
+//         onBlur={() => {
+//           setTimeout(() => {
+//             setIsDropdownOpen(false);
+//           }, 100);
+//         }}
+//       />
         
-        {isDropdownOpen && (
-          <div className="category-dropdown">
-            {filteredCategories.map((categoryName) => (
-              <div
-                key={categoryName}
-                className="category-option"
-                onMouseDown={() => handleCategorySelect(categoryName)}
-              >
-                {categoryName}
-                {categoryName.toLowerCase() === formData.category.toLowerCase() && (
-                  <span className="existing-tag"> (existing)</span>
-                )}
-              </div>
-            ))}
+//         {isDropdownOpen && (
+//           <div className="category-dropdown">
+//             {filteredCategories.map((categoryName) => (
+//               <div
+//                 key={categoryName}
+//                 className="category-option"
+//                 onMouseDown={() => handleCategorySelect(categoryName)}
+//               >
+//                 {categoryName}
+//                 {categoryName.toLowerCase() === formData.category.toLowerCase() && (
+//                   <span className="existing-tag"> (existing)</span>
+//                 )}
+//               </div>
+//             ))}
             
-            {!categoryExists && formData.category && (
-              <div className="category-option new-category">
-                Create new: "{formData.category}"
-              </div>
-            )}
-          </div>
-        )}
+//             {!categoryExists && formData.category && (
+//               <div className="category-option new-category">
+//                 Create new: "{formData.category}"
+//               </div>
+//             )}
+//           </div>
+//         )}
+//       </div>
+//       <button type="submit">Add Expense</button>
+//     </form>
+//   );
+// };
+return (
+  <div className="expense-form"> 
+  <form onSubmit={handleSubmit} className="expense-form">
+    <div className="form-container">
+      {/* Amount Input */}
+      <div className="form-group">
+        <input
+          name="amount"
+          placeholder="Amount"
+          value={formData.amount}
+          onChange={handleChange}
+          className="form-input"
+        />
       </div>
-      <button type="submit">Add Expense</button>
-    </form>
-  );
-};
 
+      {/* Description Input */}
+      <div className="form-group">
+        <input
+          name="description"
+          placeholder="Description"
+          value={formData.description}
+          onChange={handleChange}
+          className="form-input"
+        />
+      </div>
+
+      {/* Category Selector */}
+      <div className="form-group">
+        <div className="category-selector">
+          <input
+            type="text"
+            placeholder="Select or type a category"
+            value={formData.category}
+            onChange={handleInputChange}
+            className="form-input"
+            onFocus={() => setIsDropdownOpen(true)}
+            onBlur={() => setTimeout(() => setIsDropdownOpen(false), 100)}
+          />
+          
+          {isDropdownOpen && (
+            <div className="category-dropdown">
+              {filteredCategories.map((categoryName) => (
+                <div
+                  key={categoryName}
+                  className="category-option"
+                  onMouseDown={() => handleCategorySelect(categoryName)}
+                >
+                  {categoryName}
+                  {categoryName.toLowerCase() === formData.category.toLowerCase() && (
+                    <span className="existing-tag"> (existing)</span>
+                  )}
+                </div>
+              ))}
+              
+              {!categoryExists && formData.category && (
+                <div className="category-option new-category">
+                  Create new: "{formData.category}"
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Submit Button */}
+      <div className="form-group">
+        <button type="submit" className="submit-button">
+          Add Expense
+        </button>
+      </div>
+    </div>
+  </form>
+  </div>
+);
+}
 export default ExpenseForm;

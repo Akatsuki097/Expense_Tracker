@@ -1,8 +1,8 @@
 export declare class UpdateExpenseDto {
-    readonly amount?: number;
-    readonly description?: string;
+    amount?: number;
+    description?: string;
     readonly date?: Date;
-    readonly category?: string;
+    category?: string;
     readonly recurring?: boolean;
     readonly recurrenceInterval?: 'daily' | 'weekly' | 'monthly';
 }

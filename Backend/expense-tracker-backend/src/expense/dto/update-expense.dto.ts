@@ -1,9 +1,19 @@
 // expense/dto/update-expense.dto.ts
+import { IsString, IsNumber, IsOptional } from 'class-validator';
 export class UpdateExpenseDto {
-    readonly amount?: number;
-    readonly description?: string;
+    @IsOptional()
+    @IsNumber()
+    amount?: number;
+
+    @IsOptional()
+    @IsString()
+    description?: string;
+
     readonly date?: Date;
-    readonly category?: string;
+
+    @IsOptional()
+    @IsString()
+    category?: string; 
     readonly recurring?: boolean;
     readonly recurrenceInterval?: 'daily' | 'weekly' | 'monthly';
   }

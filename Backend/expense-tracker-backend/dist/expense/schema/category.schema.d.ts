@@ -1,4 +1,4 @@
-import { Schema, Document } from 'mongoose';
+import { Schema, Document, Types } from 'mongoose';
 export declare const CategorySchema: Schema<any, import("mongoose").Model<any, any, any, any, any, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, {
     name: string;
 }, Document<unknown, {}, import("mongoose").FlatRecord<{
@@ -6,10 +6,11 @@ export declare const CategorySchema: Schema<any, import("mongoose").Model<any, a
 }>> & import("mongoose").FlatRecord<{
     name: string;
 }> & {
-    _id: import("mongoose").Types.ObjectId;
+    _id: Types.ObjectId;
 } & {
     __v: number;
 }>;
 export interface Category extends Document {
+    _id: Types.ObjectId;
     name: string;
 }

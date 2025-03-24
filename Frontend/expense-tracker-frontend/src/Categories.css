@@ -1,0 +1,43 @@
+.categories {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+  }
+  
+  .add-category {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .category-list {
+    border-top: 1px solid #ddd;
+    padding-top: 15px;
+  }
+  
+  .category-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+  }
+  
+  .category-item input {
+    flex-grow: 1;
+    padding: 5px;
+  }
+  
+  button {
+    padding: 5px 10px;
+    cursor: pointer;
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  button:hover {
+    background: #e0e0e0;
+  }

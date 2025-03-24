@@ -25,14 +25,23 @@ let ExpenseService = class ExpenseService {
         this.categoryService = categoryService;
     }
     async create(createExpenseDto) {
-        await this.categoryService.findOrCreate(createExpenseDto.category);
-        const createdExpense = new this.expenseModel(createExpenseDto);
-        return await createdExpense.save();
+        const category = await this.categoryService.findOrCreate(createExpenseDto.category);
+        const createdExpense = new this.expenseModel({
+            ...createExpenseDto,
+            category: category._id
+        });
+        await createdExpense.save();
+        return createdExpense.populate('category');
     }
     async findAll(options) {
         const { page, limit, category } = options;
         const filter = category ? { category } : {};
         return await this.expenseModel.find(filter)
+            .populate({
+            path: 'category',
+            select: 'name',
+            options: { retainNullValues: true }
+        })
             .sort({ date: -1 })
             .skip((page - 1) * limit)
             .limit(limit)
@@ -46,7 +55,17 @@ let ExpenseService = class ExpenseService {
         return expense;
     }
     async update(id, updateExpenseDto) {
-        const updatedExpense = await this.expenseModel.findByIdAndUpdate(id, updateExpenseDto, { new: true });
+        const updatePayload = { ...updateExpenseDto };
+        if (updatePayload.category) {
+            const category = await this.categoryService.findOrCreate(updatePayload.category);
+            updatePayload.category = category._id;
+        }
+        const updatedExpense = await this.expenseModel
+            .findByIdAndUpdate(id, updatePayload, {
+            new: true,
+            runValidators: true
+        })
+            .populate('category');
         if (!updatedExpense) {
             throw new common_1.NotFoundException(`Expense #${id} not found`);
         }

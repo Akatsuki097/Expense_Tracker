@@ -2,3 +2,12 @@
 GET http://localhost:3000/expenses?page=1&limit=10
 ### Get categories
 curl http://localhost:3000/categories
+###post
+POST http://localhost:3000/expenses
+Content-Type: application/json
+
+{
+  "amount": 100,
+  "category": "ggs",
+  "description" : "asdas"
+}

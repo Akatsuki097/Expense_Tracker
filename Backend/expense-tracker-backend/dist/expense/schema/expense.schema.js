@@ -6,7 +6,7 @@ exports.ExpenseSchema = new mongoose_1.Schema({
     amount: { type: Number, required: true },
     description: String,
     date: { type: Date, default: Date.now },
-    category: { type: String, required: true },
+    category: { type: mongoose_1.Schema.Types.ObjectId, ref: 'Category', required: true },
     recurring: { type: Boolean, default: false },
     recurrenceInterval: { type: String, enum: ['daily', 'weekly', 'monthly'] },
 });
