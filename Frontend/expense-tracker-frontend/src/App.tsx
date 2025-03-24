@@ -7,7 +7,7 @@ import ExpenseForm from './components/ExpenseForm';
 import ChartComponent from './components/ChartComponent';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Categories from './components/Categories';
-
+import "./App.css"
 // Dummy data for the chart component example
 const dummyChartData = [
   { date: '2025-03-10T00:00:00.000Z', amount: 50 },
@@ -20,9 +20,9 @@ const App: React.FC = () => {
     <Provider store={store}>
       <Router>
         <div className="App">
-        <h1 className="heading-center">Expense Tracker</h1>
-          <div className="expense-tracker-container">
-            
+        
+          <div className="expense-tracker-header">
+          <h1 className="heading-center">Expense Tracker</h1>
             <Routes>
             <Route path="/expenses" element={
               <>

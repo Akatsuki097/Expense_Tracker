@@ -1,4 +1,3 @@
-// src/components/ChartComponent.tsx
 import React from 'react';
 import { Line } from 'react-chartjs-2';
 
@@ -8,7 +7,9 @@ interface ChartProps {
 
 const ChartComponent: React.FC<ChartProps> = ({ data }) => {
   const chartData = {
-    labels: data.map((item) => new Date(item.date).toLocaleDateString()),
+    labels: data.map((item) =>
+      new Date(item.date).toLocaleDateString()
+    ),
     datasets: [
       {
         label: 'Daily Expenses',

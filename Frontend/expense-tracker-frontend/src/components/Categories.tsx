@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
-import { 
+import {
   useGetCategoriesQuery,
   useCreateCategoryMutation,
   useUpdateCategoryMutation,
-  useDeleteCategoryMutation
+  useDeleteCategoryMutation,
 } from '../services/category';
 
-import "../Categories.css"
+import "../Categories.css";
 
 const Categories: React.FC = () => {
-  const { data: categories = [], isLoading, error  } = useGetCategoriesQuery();
+  const { data: categories = [], isLoading, error } = useGetCategoriesQuery();
   const [createCategory] = useCreateCategoryMutation();
   const [updateCategory] = useUpdateCategoryMutation();
   const [deleteCategory] = useDeleteCategoryMutation();
-  
+
   const [newCategory, setNewCategory] = useState('');
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editName, setEditName] = useState('');
@@ -32,10 +32,7 @@ const Categories: React.FC = () => {
 
   const handleUpdate = async () => {
     if (editingId && editName.trim()) {
-      await updateCategory({ 
-        id: editingId, 
-        name: editName.trim() 
-      });
+      await updateCategory({ id: editingId, name: editName.trim() });
       cancelEdit();
     }
   };
@@ -45,12 +42,10 @@ const Categories: React.FC = () => {
     setEditName('');
   };
 
- 
-
   return (
     <div className="categories">
       <h2>Manage Categories</h2>
-      
+
       <div className="add-category">
         <input
           type="text"
